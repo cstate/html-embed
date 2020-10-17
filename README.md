@@ -1,4 +1,4 @@
-<p align="center"><img src="images/logosvg?sanitize=true" alt="cState alt logo"></p>
+<p align="center"><img src="images/logo.svg?sanitize=true" alt="cState alt logo"></p>
 
 ✔ The basic JavaScript code for checking if a cState-powered status page (using its read-only API).
 
