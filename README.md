@@ -1,6 +1,6 @@
-# HTML Embed for cState
+<p align="center"><img src="images/logosvg?sanitize=true" alt="cState alt logo"></p>
 
-✔ The basic code for checking if a cState-powered status page (using its read-only API).
+✔ The basic JavaScript code for checking if a cState-powered status page (using its read-only API).
 
 **There is no UI for this project, so you are you free to write that yourself or [contribute so others can use it](https://github.com/cstate/html-embed/issues/2).**
 
