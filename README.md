@@ -1,8 +1,10 @@
-# HTML Embed for cState
+<p align="center"><img src="images/logosvg?sanitize=true" alt="cState alt logo"></p>
 
-✔ The basic code for checking if a cState-powered status page (using its read-only API) has a status other than "fully operational."
+✔ The basic JavaScript code for checking if a cState-powered status page (using its read-only API).
 
-**This is a work in progres. Playkit for developers.**
+**There is no UI for this project, so you are you free to write that yourself or [contribute so others can use it](https://github.com/cstate/html-embed/issues/2).**
+
+The `index.js` file has the JavaScript you can add to your page and use for making other things happen.
 
 ## Prerequisites
 
@@ -23,4 +25,6 @@ The demo page uses this for its `netlify.toml`:
 
 The idea for this project was [originally inspired](https://github.com/cstate/cstate/issues/131) by the GitHub / cState user @ririko5834.
 
-MIT
+Contributing rules same as on main [cState repository](https://github.com/cstate/cstate)
+
+Licensed MIT, made by Mantas Vilčinskas since 2020. Thank you to all contributors.
