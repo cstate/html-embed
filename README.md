@@ -21,6 +21,24 @@ The demo page uses this for its `netlify.toml`:
       Access-Control-Allow-Origin = "*"
 ```
 
+For `vercel.json`:
+
+```json
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
+      ]
+    }
+  ]
+}
+```
+
+
 ## License
 
 The idea for this project was [originally inspired](https://github.com/cstate/cstate/issues/131) by the GitHub / cState user @ririko5834.
