@@ -1,0 +1,100 @@
+<!-- Filler code, ignore this and go to the bottom -->
+<!DOCTYPE html>
+<title>Example Dot Indicator</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  /* just for this demo page */
+  html, body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+  a { color: #fff; text-decoration: none; }
+  footer { background: #222; color: white; height: 30vh; padding-top: 7.5vh; text-align: center; }
+  @media (prefers-color-scheme: dark) {
+    html, body { background: #333; }
+  }
+</style>
+
+<div style="height: 70vh"></div>
+<!-- Example container -->
+<footer>
+
+  <a href="https://flamboyant-shirley-6bc75e.netlify.app">Status &nbsp;<span class="status-indicator"></span></a>
+
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  
+  <a href="#">Terms</a>
+
+  &nbsp; &nbsp; &nbsp; &nbsp;
+
+  <a href="#">Privacy</a>
+  
+  &nbsp; &nbsp; &nbsp; &nbsp;
+
+  <a href="#">Contact</a>
+
+</footer>
+
+<!-- Code -->
+<script>
+// HTML Embed for cState
+// Version 2.0
+// github.com/cstate/html-embed
+
+// Site + '/index.json'
+var cStateAPIRoot = 'https://flamboyant-shirley-6bc75e.netlify.app/index.json'
+var cStateDotTargetElement = document.querySelector('.status-indicator');
+
+// Only change this if you are hacking around! :)
+var cStateEmbedPrefix = '[cState HTML Embed v2.0] ';
+var cStateEmbedDebugging = true;
+var cStateAPIStatus = 'tryingToGetStatus';
+ 
+fetch(cStateAPIRoot)
+  .then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log(cStateEmbedPrefix + 'API not OK, it sent HTTP status code ' +
+          response.status);
+        return;
+      }
+
+      // Examine the text in the response
+      response.json().then(function(data) {
+        cStateAPIStatus = data.summaryStatus;
+
+        // When debugging, this code should be run to see API response
+        if (cStateEmbedDebugging) {
+          console.log(cStateEmbedPrefix + 'API response: ', data);
+          console.log(cStateEmbedPrefix + 'API says status page is: ' + cStateAPIStatus);
+        }
+
+        // UI code (run even if not debugging)
+        // You can change how the dot appears here
+        cStateDotTargetElement.style.display = 'inline-block';
+        cStateDotTargetElement.style.height = '10px';
+        cStateDotTargetElement.style.width = '10px';
+        cStateDotTargetElement.style.borderRadius = '50%';
+        cStateDotTargetElement.setAttribute('aria-label', 'Status indicator'); 
+        cStateDotTargetElement.style.backgroundColor = '#333';
+        // Sets color and accessible label
+        if (cStateAPIStatus === 'ok') {
+          cStateDotTargetElement.style.backgroundColor = '#4caf50';
+          cStateDotTargetElement.setAttribute('aria-label', 'Green icon indicating no issues');
+        } else if (cStateAPIStatus === 'notice') {
+          cStateDotTargetElement.style.backgroundColor = '#607d8b';
+          cStateDotTargetElement.setAttribute('aria-label', 'Gray icon asking users to check status page');
+        } else if (cStateAPIStatus === 'disrupted') {
+          cStateDotTargetElement.style.backgroundColor = '#ff9800';
+          cStateDotTargetElement.setAttribute('aria-label', 'Orange icon indicating disruptions');
+        } else { // down
+          cStateDotTargetElement.style.backgroundColor = '#82071e';
+          cStateDotTargetElement.setAttribute('aria-label', 'Red icon indicating downtime');
+        }
+
+      });
+    }
+  )
+  .catch(function(err) {
+    console.log('Fetch error :-S', err);
+  });
+</script>
