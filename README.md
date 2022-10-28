@@ -47,6 +47,8 @@ Modify the embed to your liking. Make sure to define your status page link varia
 
 This is a great option for footers and if you want to have a persistent icon showing that your services are online / there are no posted issues.
 
+This code is only run on page load.
+
 There is an example in `dot-indicator.html`. [View it here.](https://cstate-embed.pages.dev/dot-indicator.html)
 
 ## Second UI: Alert Box
@@ -58,6 +60,7 @@ Modify the embed to your liking:
 - You might also want to change the text if your main user language is not English.
 - You might want to not show this alert if there is a `notice` type issue (like for maintenance announcements). **By default,** the alert shows for all status-impacting alerts.
 - You might want to change the colors if you have, for example, a dark website.
+- By default the code only runs on page load but can be edited to do so every x seconds or programatically.
 
 There is an example in `dialog.html`. [View it here.](https://cstate-embed.pages.dev/dialog.html)
 

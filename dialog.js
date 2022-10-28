@@ -14,8 +14,7 @@ var cStateEmbedDebugging = false;
 var cStateAPIStatus = 'tryingToGetStatus';
 var cStateAPIRoot = cStateRoot + '/index.json';
 
-
-fetch(cStateAPIRoot)
+var cStateAlertFunc = fetch(cStateAPIRoot)
   .then(
     function(response) {
       if (response.status !== 200) {
@@ -89,3 +88,8 @@ fetch(cStateAPIRoot)
   .catch(function(err) {
     console.log('Status page is down? fetch error. aborting', err);
   });
+  
+
+// function can be run programatically or only on page load
+// e.g. setTimeout(cStateAlertFunc, 5000000);
+cStateAlertFunc();

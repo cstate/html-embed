@@ -18,6 +18,7 @@
 
 <!-- Code -->
 <script>
+  
 // HTML Embed for cState
 // Version 2.0
 // ALERT – DIALOG STYLE
@@ -29,12 +30,12 @@ var cStateRoot = 'https://flamboyant-shirley-6bc75e.netlify.app'
 
 // Only change this if you are hacking around! :)
 var cStateEmbedPrefix = '[cState HTML Embed v2.0] ';
-var cStateEmbedDebugging = true;
+var cStateEmbedDebugging = false;
 var cStateAPIStatus = 'tryingToGetStatus';
 var cStateAPIRoot = cStateRoot + '/index.json';
 
 
-fetch(cStateAPIRoot)
+var cStateAlertFunc = fetch(cStateAPIRoot)
   .then(
     function(response) {
       if (response.status !== 200) {
@@ -108,4 +109,7 @@ fetch(cStateAPIRoot)
   .catch(function(err) {
     console.log('Status page is down? fetch error. aborting', err);
   });
+  
+
+  cStateAlertFunc();
 </script>

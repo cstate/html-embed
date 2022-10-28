@@ -14,6 +14,7 @@ var cStateEmbedPrefix = '[cState HTML Embed v2.0] ';
 var cStateEmbedDebugging = false;
 var cStateAPIStatus = 'tryingToGetStatus';
  
+// runs only on load
 fetch(cStateAPIRoot)
   .then(
     function(response) {
@@ -62,3 +63,5 @@ fetch(cStateAPIRoot)
   .catch(function(err) {
     console.log('Fetch error. Aborting', err);
   });
+
+ 
