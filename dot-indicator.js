@@ -1,52 +1,17 @@
-<!-- Filler code, ignore this and go to the bottom -->
-<!DOCTYPE html>
-<title>Example Dot Indicator</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-  /* just for this demo page */
-  html, body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
-  a { color: #fff; text-decoration: none; }
-  footer { background: #222; color: white; height: 30vh; padding-top: 7.5vh; text-align: center; }
-  @media (prefers-color-scheme: dark) {
-    html, body { background: #333; }
-  }
-</style>
-
-<div style="height: 70vh"></div>
-<!-- Example container -->
-<footer>
-
-  <a href="https://flamboyant-shirley-6bc75e.netlify.app">Status &nbsp;<span class="status-indicator"></span></a>
-
-  &nbsp; &nbsp; &nbsp; &nbsp;
-  
-  <a href="#">Terms</a>
-
-  &nbsp; &nbsp; &nbsp; &nbsp;
-
-  <a href="#">Privacy</a>
-  
-  &nbsp; &nbsp; &nbsp; &nbsp;
-
-  <a href="#">Contact</a>
-
-</footer>
-
-<!-- Code -->
-<script>
 // HTML Embed for cState
 // Version 2.0
+// DOT INDICATOR STYLE
+//
 // github.com/cstate/html-embed
 
+// THESE ARE THE TWO VARIABLES YOU PROBABLY WANT TO CHANGE
 // Site + '/index.json'
 var cStateAPIRoot = 'https://flamboyant-shirley-6bc75e.netlify.app/index.json'
 var cStateDotTargetElement = document.querySelector('.status-indicator');
 
 // Only change this if you are hacking around! :)
 var cStateEmbedPrefix = '[cState HTML Embed v2.0] ';
-var cStateEmbedDebugging = true;
+var cStateEmbedDebugging = false;
 var cStateAPIStatus = 'tryingToGetStatus';
  
 fetch(cStateAPIRoot)
@@ -95,6 +60,5 @@ fetch(cStateAPIRoot)
     }
   )
   .catch(function(err) {
-    console.log('Fetch error :-S', err);
+    console.log('Fetch error. Aborting', err);
   });
-</script>

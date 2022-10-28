@@ -1,23 +1,4 @@
-<!-- Filler code, ignore this and go to the bottom -->
-<!DOCTYPE html>
-<title>Example cState Dialog</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-  html, body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
-
-  @media (prefers-color-scheme: dark) {
-    html, body { background: #333; }
-  }
-</style>
-
-<div style="height: 100vh"></div>
- 
-
-
-<!-- Code -->
-<script>
 // HTML Embed for cState
 // Version 2.0
 // ALERT – DIALOG STYLE
@@ -29,7 +10,7 @@ var cStateRoot = 'https://flamboyant-shirley-6bc75e.netlify.app'
 
 // Only change this if you are hacking around! :)
 var cStateEmbedPrefix = '[cState HTML Embed v2.0] ';
-var cStateEmbedDebugging = true;
+var cStateEmbedDebugging = false;
 var cStateAPIStatus = 'tryingToGetStatus';
 var cStateAPIRoot = cStateRoot + '/index.json';
 
@@ -108,4 +89,3 @@ fetch(cStateAPIRoot)
   .catch(function(err) {
     console.log('Status page is down? fetch error. aborting', err);
   });
-</script>
