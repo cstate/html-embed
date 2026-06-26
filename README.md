@@ -2,6 +2,8 @@
 
 ✔ SUPER SMALL bits of code that check if a cState-powered status page (using its read-only API) has active issues; if they do, an alert can be shown, or you can write a custom callback. Or, it is possible to simply embed a dot indicator in a place like your footer.
 
+The snippets are compatible with cState v7 index JSON. They still use `summaryStatus` for status indicators, and tolerate the v7 `records` array for active experiments and other operational records.
+
 ## Prerequisites
 
 * You have a cState status page set up with a [read-only API](https://github.com/cstate/cstate/wiki/API)
@@ -49,6 +51,8 @@ This is a great option for footers and if you want to have a persistent icon sho
 
 This code is only run on page load.
 
+If `.status-indicator` is missing, the snippet now exits without breaking the host page.
+
 There is an example in `dot-indicator.html`. [View it here.](https://cstate-embed.pages.dev/dot-indicator.html)
 
 ## Second UI: Alert Box
@@ -61,6 +65,7 @@ Modify the embed to your liking:
 - You might want to not show this alert if there is a `notice` type issue (like for maintenance announcements). **By default,** the alert shows for all status-impacting alerts.
 - You might want to change the colors if you have, for example, a dark website.
 - By default the code only runs on page load but can be edited to do so every x seconds or programatically.
+- In cState v7, active records can add context to the alert copy, but healthy status pages still stay quiet.
 
 There is an example in `dialog.html`. [View it here.](https://cstate-embed.pages.dev/dialog.html)
 

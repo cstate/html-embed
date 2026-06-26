@@ -14,9 +14,36 @@ var cStateEmbedDebugging = false;
 var cStateAPIStatus = 'tryingToGetStatus';
 var cStateAPIRoot = cStateRoot + '/index.json';
 
-var cStateAlertFunc = fetch(cStateAPIRoot)
-  .then(
-    function(response) {
+function cStateReadStatus(data) {
+  return data && data.summaryStatus ? data.summaryStatus : 'unknown';
+}
+
+function cStateActiveRecords(data) {
+  if (!data || !Array.isArray(data.records)) {
+    return [];
+  }
+
+  return data.records.filter(function(record) {
+    return record && (record.state === 'active' || record.severity === 'ongoing');
+  });
+}
+
+function cStateAlertCopy(data) {
+  var activeExperiments = cStateActiveRecords(data).filter(function(record) {
+    return record.recordType === 'experiment' || record.is === 'experiment';
+  });
+
+  return {
+    title: cStateAPIStatus === 'notice' ? 'Status update' : 'Service disruption',
+    description: activeExperiments.length > 0
+      ? 'Service status has changed, with active experiments also listed on the status page.'
+      : 'Service status has changed. See the latest update on the status page.'
+  };
+}
+
+function cStateAlertFunc() {
+  return fetch(cStateAPIRoot)
+    .then(function(response) {
       if (response.status !== 200) {
         console.log(cStateEmbedPrefix + 'API not OK, it sent HTTP status code ' +
           response.status);
@@ -25,7 +52,7 @@ var cStateAlertFunc = fetch(cStateAPIRoot)
 
       // Examine the text in the response
       response.json().then(function(data) {
-        cStateAPIStatus = data.summaryStatus;
+        cStateAPIStatus = cStateReadStatus(data);
 
         // When debugging, this code should be run to see API response
         if (cStateEmbedDebugging) {
@@ -36,8 +63,9 @@ var cStateAlertFunc = fetch(cStateAPIRoot)
         // UI code
         // You can change how the alert appears here
         function cStateAlertIn() {
-          var cStateAlertTitle = 'Having issues?';
-          var cStateAlertDescription = 'It looks like there are service disruptions. We apologize for the inconvenience. For more updates, please check <a href="' + cStateRoot + '" style="text-decoration: none; border-bottom: 1px solid currentColor; color: #007bff">our status page</a>.';
+          var copy = cStateAlertCopy(data);
+          var cStateAlertTitle = copy.title;
+          var cStateAlertDescription = copy.description + ' <a href="' + cStateRoot + '" style="text-decoration: none; border-bottom: 1px solid currentColor; color: #007bff">View updates</a>.';
 
           document.body.insertAdjacentHTML("beforeend",
           `<style>
@@ -83,11 +111,11 @@ var cStateAlertFunc = fetch(cStateAPIRoot)
         }
 
       });
-    }
-  )
-  .catch(function(err) {
-    console.log('Status page is down? fetch error. aborting', err);
-  });
+    })
+    .catch(function(err) {
+      console.log('Status page is down? fetch error. aborting', err);
+    });
+}
   
 
 // function can be run programatically or only on page load

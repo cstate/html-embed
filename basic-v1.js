@@ -9,6 +9,10 @@ var cStateEmbedPrefix = '[cState HTML Embed v1.0] ';
 var cStateEmbedDebugging = false;
 var cStateAPIStatus = 'tryingToGetStatus';
 
+function cStateReadStatus(data) {
+  return data && data.summaryStatus ? data.summaryStatus : 'unknown';
+}
+
 // Code itself
 fetch(cStateAPIRoot)
   .then(
@@ -21,11 +25,11 @@ fetch(cStateAPIRoot)
 
       // Examine the text in the response
       response.json().then(function(data) {
+        cStateAPIStatus = cStateReadStatus(data);
         
         // When debugging, this code should be run to see API response
         if (cStateEmbedDebugging) {
           console.log(cStateEmbedPrefix + 'API response: ', data);
-          cStateAPIStatus = data.summaryStatus;
           console.log(cStateEmbedPrefix + 'API says status page is: ' + cStateAPIStatus);
         }
           
@@ -35,4 +39,3 @@ fetch(cStateAPIRoot)
   .catch(function(err) {
     console.log('Fetch error :-S', err);
   });
-
