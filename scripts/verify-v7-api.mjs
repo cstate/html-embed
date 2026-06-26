@@ -75,4 +75,12 @@ assert.equal(dialog.cStateAPIStatus, 'disrupted');
 assert.match(dialog.document.body.html, /Service disruption/);
 assert.match(dialog.document.body.html, /active experiments/);
 
+const dialogDemo = fs.readFileSync('dialog.html', 'utf-8');
+assert.match(dialogDemo, /<script src="dialog\.js"><\/script>/);
+assert.doesNotMatch(dialogDemo, /data\.summaryStatus/);
+
+const dotDemo = fs.readFileSync('dot-indicator.html', 'utf-8');
+assert.match(dotDemo, /<script src="dot-indicator\.js"><\/script>/);
+assert.doesNotMatch(dotDemo, /data\.summaryStatus/);
+
 console.log('cstate html-embed v7 API verification passed.');
