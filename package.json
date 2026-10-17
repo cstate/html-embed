@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node scripts/verify-v7-api.mjs"
+    "test": "node scripts/verify-v7-api.mjs",
+    "test:browser": "node scripts/verify-browser.mjs"
   }
 }

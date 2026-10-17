@@ -2,7 +2,7 @@
 
 ✔ SUPER SMALL bits of code that check if a cState-powered status page (using its read-only API) has active issues; if they do, an alert can be shown, or you can write a custom callback. Or, it is possible to simply embed a dot indicator in a place like your footer.
 
-The snippets are compatible with cState v7 index JSON. They still use `summaryStatus` for status indicators, and tolerate the v7 `records` array for active experiments and other operational records.
+The snippets are compatible with the cState v7 index JSON contract. Status indicators use `summaryStatus`; the dialog can also select the highest-priority active record and show its kind, title, summary, and permalink.
 
 ## Prerequisites
 
@@ -62,12 +62,21 @@ Grab the code from `dialog.js`.
 Modify the embed to your liking:
 
 - You might also want to change the text if your main user language is not English.
-- You might want to not show this alert if there is a `notice` type issue (like for maintenance announcements). **By default,** the alert shows for all status-impacting alerts.
+- Disruptions and outages always take priority. Healthy pages and notice-only updates stay quiet by default.
+- To surface the highest-priority active record on an otherwise healthy page, define `cStateShowRecordNotices = true` before loading `dialog.js`.
 - You might want to change the colors if you have, for example, a dark website.
 - By default the code only runs on page load but can be edited to do so every x seconds or programatically.
-- In cState v7, active records can add context to the alert copy, but healthy status pages still stay quiet.
+- In cState v7, disruption dialogs include the highest-priority active record as supporting context. Record notices use the record permalink when one is available.
+- Explicit completed and archived states stay out of notices, including legacy records with `severity: ongoing`. Future experiments stay out until their start date.
+- Record titles, summaries, and kinds render as text. Update links accept HTTP(S) URLs without embedded credentials; invalid links fall back to your configured status-page root.
 
 There is an example in `dialog.html`. [View it here.](https://cstate-embed.pages.dev/dialog.html)
+
+## Checks
+
+`npm test` checks the canonical v7 JSON fixture, notice priorities, lifecycle states, escaped record text, and update links. Set `CSTATE_V7_FIXTURE` if the cState repository is outside the sibling `cstate` directory.
+
+`npm run test:browser` also checks hostile values in real Chromium at desktop and mobile widths. It requires an installed Playwright runtime and browser; set `CSTATE_PLAYWRIGHT_MODULE` to a bundled Playwright module path when needed. Set `CSTATE_EMBED_SCREENSHOTS` to a directory to save screenshots. The browser fixture intercepts all requests and performs no external writes.
 
 ## License
 
